@@ -1,0 +1,12 @@
+# Git
+.git/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# App Data
+.gemini/
+.agent/
+brain/
+artifacts/
