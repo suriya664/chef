@@ -852,4 +852,66 @@ h6,
         line-height: 1.3 !important;
     }
 }
+
+/* Artisan Cuisine Banner Styles */
+.artisan-banner {
+    height: 60vh;
+    min-height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+.artisan-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.5s ease;
+}
+
+.artisan-banner:hover img {
+    transform: scale(1.05);
+}
+
+.artisan-banner .text-white h1 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    font-family: 'Emblema One', cursive;
+}
+
+.artisan-banner .text-white p {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Responsive Artisan Banner */
+@media (max-width: 768px) {
+    .artisan-banner {
+        height: 50vh;
+        min-height: 300px;
+    }
+    
+    .artisan-banner .text-white h1 {
+        font-size: 2.5rem !important;
+        letter-spacing: 2px !important;
+    }
+    
+    .artisan-banner .text-white p {
+        font-size: 1.2rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .artisan-banner {
+        height: 40vh;
+        min-height: 250px;
+    }
+    
+    .artisan-banner .text-white h1 {
+        font-size: 2rem !important;
+        letter-spacing: 1px !important;
+    }
+    
+    .artisan-banner .text-white p {
+        font-size: 1rem !important;
+    }
 }
