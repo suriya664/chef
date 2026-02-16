@@ -14,6 +14,11 @@
     --navbar-bg: rgba(255, 255, 255, 0.95);
     --footer-bg: #f8f9fa;
     --selection-title: #FFC107;
+    
+    /* Theme Toggle Styles */
+    --theme-toggle-bg: var(--light);
+    --theme-toggle-color: var(--text-main);
+    --theme-toggle-hover: var(--primary);
 }
 
 [data-theme="dark"] {
@@ -27,6 +32,11 @@
     --card-shadow: none;
     --navbar-bg: rgba(17, 17, 17, 0.95);
     --footer-bg: #111111;
+    
+    /* Theme Toggle Styles - Dark Mode */
+    --theme-toggle-bg: var(--dark);
+    --theme-toggle-color: var(--text-main);
+    --theme-toggle-hover: var(--primary);
 }
 
 * {
@@ -232,6 +242,52 @@ body {
         padding: 10px 0;
     }
     
+    /* Theme Toggle Styles */
+    #theme-toggle {
+        cursor: pointer;
+        font-size: 1.2rem;
+        color: var(--theme-toggle-color);
+        transition: all 0.3s ease;
+        background: var(--theme-toggle-bg);
+        padding: 8px 12px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid transparent;
+    }
+
+    #theme-toggle:hover {
+        transform: rotate(15deg) scale(1.1);
+        background: var(--theme-toggle-hover);
+        color: var(--dark);
+    }
+
+    #theme-toggle i {
+        transition: all 0.3s ease;
+    }
+
+    /* Responsive Theme Toggle */
+    @media (max-width: 767.98px) {
+        #theme-toggle {
+            width: 35px;
+            height: 35px;
+            font-size: 1rem;
+            padding: 6px 10px;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        #theme-toggle {
+            width: 30px;
+            height: 30px;
+            font-size: 0.9rem;
+            padding: 5px 8px;
+        }
+    }
+
     /* Mobile hamburger menu spacing fixes */
     .navbar-collapse {
         background: var(--navbar-bg);
@@ -287,9 +343,25 @@ body {
         display: flex !important;
         justify-content: center;
         gap: 10px;
-        margin-top: 15px;
-        padding-top: 15px;
+        margin-top: 20px;
+        padding-top: 20px;
         border-top: 1px solid rgba(255, 193, 7, 0.2);
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    
+    .d-none.d-lg-flex .header-btn {
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+    }
+    
+    .d-none.d-lg-flex #theme-toggle {
+        flex: 0 0 auto;
+        min-width: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .header-btn {
@@ -705,10 +777,6 @@ h6,
         height: 250px !important;
     }
     
-    .team-item img {
-        height: 300px !important;
-    }
-}
 
 /* Home2 page specific fixes for signature dishes overlapping */
 @media (max-width: 1399.98px) {
@@ -783,4 +851,5 @@ h6,
         font-size: 0.85rem !important;
         line-height: 1.3 !important;
     }
+}
 }
