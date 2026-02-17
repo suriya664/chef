@@ -30,6 +30,13 @@
     });
 
 
+    // Facts counter
+    $('[data-toggle="counter-up"]').counterUp({
+        delay: 10,
+        time: 2000
+    });
+
+
     // Testimonials carousel
     $(".testimonial-carousel").owlCarousel({
         autoplay: true,
@@ -37,38 +44,12 @@
         items: 1,
         dots: false,
         loop: true,
-        nav: true,
-        navText: [
+        nav : true,
+        navText : [
             '<i class="bi bi-arrow-left"></i>',
             '<i class="bi bi-arrow-right"></i>'
         ],
     });
-
-    // Theme Switcher Logic
-    const themeToggle = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement;
-    const themeIcon = themeToggle.querySelector('i');
-
-    const setTheme = (theme) => {
-        htmlElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-        if (theme === 'dark') {
-            themeIcon.classList.replace('bi-moon', 'bi-sun');
-        } else {
-            themeIcon.classList.replace('bi-sun', 'bi-moon');
-        }
-    };
-
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        setTheme(newTheme);
-    });
-
-    // Initialize theme from local storage or default to light
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
-
+    
 })(jQuery);
-
 

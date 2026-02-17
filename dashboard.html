@@ -5,624 +5,674 @@
     <meta charset="utf-8">
     <title>Dashboard - CHEFER</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="img/favicon.png" rel="icon">
+    <meta content="Chefer Dashboard" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Emblema+One&family=Poppins:wght@400;600&display=swap"
         rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
     <style>
-        .dashboard-header {
-            background: var(--navbar-bg);
-            padding: 25px 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, .1);
-            border-bottom: 3px solid var(--primary);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-        }
-
-        .dashboard-header .logo-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            transition: transform .3s ease
-        }
-
-        .dashboard-header .logo-link:hover {
-            transform: scale(1.05)
-        }
-
-        .dashboard-header .d-flex {
-            position: absolute;
-            right: 40px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .logo-text {
-            font-family: 'Emblema One', cursive;
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin: 0;
-            text-shadow: none;
-        }
-
-        #theme-toggle {
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: var(--text-main);
-            transition: transform 0.3s ease;
-            background: var(--light);
-            padding: 10px;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #theme-toggle:hover {
-            transform: rotate(15deg) scale(1.1);
-            background: var(--primary);
-            color: var(--dark);
-        }
-
-        .btn-logout {
-            background: var(--primary);
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: all .3s ease;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, .3);
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-logout:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 193, 7, .4);
-            background: #e6a800;
-        }
-
         body {
-            background: var(--bg-main);
+            background: #222429;
+            overflow-x: hidden;
+        }
+
+        .dashboard-wrapper {
+            display: flex;
             min-height: 100vh;
-            font-family: 'Poppins', sans-serif;
-            color: var(--text-main);
         }
 
-        .dashboard-content {
-            padding: 40px;
-            max-width: 1400px;
-            margin: 0 auto;
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: #111111;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            transition: all 0.3s;
+            z-index: 1000;
         }
 
-        .welcome-section {
-            background: var(--card-bg);
-            border-radius: 25px;
-            padding: 50px;
-            margin-bottom: 40px;
-            box-shadow: var(--card-shadow);
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #2a2c32;
+        }
+
+        .sidebar-header h2 {
+            font-family: 'Emblema One', system-ui;
+            color: #FFC107;
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .sidebar-menu {
+            padding: 1rem 0;
+        }
+
+        .menu-item {
+            padding: 0.75rem 1.5rem;
+            color: #BDBDBF;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background: #222429;
+            color: #FFC107;
+            border-left-color: #FFC107;
+        }
+
+        .menu-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-footer {
+            padding: 1.5rem;
+            border-top: 1px solid #2a2c32;
+            margin-top: auto;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #BDBDBF;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #FFC107;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #111111;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .top-bar {
+            background: #111111;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar h1 {
+            color: #fff;
+            margin: 0;
+            font-size: 1.75rem;
+        }
+
+        .top-bar-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .notification-btn {
             position: relative;
-            overflow: hidden;
-            border: 3px solid var(--primary);
+            background: #222429;
+            border: none;
+            color: #BDBDBF;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .welcome-section::before {
-            content: '';
+        .notification-btn:hover {
+            background: #2a2c32;
+            color: #FFC107;
+        }
+
+        .notification-badge {
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 193, 7, .05) 0%, transparent 70%);
-            animation: float 6s ease-in-out infinite;
+            top: -5px;
+            right: -5px;
+            background: #dc3545;
+            color: #fff;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .welcome-section h1 {
-            color: var(--text-main);
-            margin-bottom: 15px;
-            font-size: 2.5rem;
-            font-weight: 700;
-            text-shadow: none;
-            position: relative;
-            z-index: 1;
-        }
-
-        .welcome-section p {
-            color: var(--text-main);
-            font-size: 1.2rem;
-            position: relative;
-            z-index: 1;
-        }
-
+        /* Stats Cards */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .stat-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 35px;
-            border: none;
-            transition: all .4s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--primary);
+            background: #111111;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #FFC107;
+            transition: all 0.3s;
         }
 
         .stat-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(255, 193, 7, .3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-card.success {
+            border-left-color: #198754;
+        }
+
+        .stat-card.info {
+            border-left-color: #0dcaf0;
+        }
+
+        .stat-card.warning {
+            border-left-color: #ffc107;
+        }
+
+        .stat-card.danger {
+            border-left-color: #dc3545;
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat-title {
+            color: #BDBDBF;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .stat-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--primary);
-            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 25px;
-            box-shadow: 0 8px 25px rgba(255, 193, 7, .4);
-            transition: all .3s ease;
+            font-size: 1.25rem;
         }
 
-        .stat-card:hover .stat-icon {
-            transform: scale(1.1) rotate(5deg);
+        .stat-icon.warning {
+            background: rgba(255, 193, 7, 0.1);
+            color: #FFC107;
         }
 
-        .stat-icon i {
-            font-size: 2rem;
-            color: var(--dark);
+        .stat-icon.success {
+            background: rgba(25, 135, 84, 0.1);
+            color: #198754;
+        }
+
+        .stat-icon.info {
+            background: rgba(13, 202, 240, 0.1);
+            color: #0dcaf0;
+        }
+
+        .stat-icon.danger {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
         }
 
         .stat-value {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--text-main);
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            color: var(--secondary);
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .recent-section {
-            background: var(--card-bg);
-            border-radius: 25px;
-            padding: 40px;
-            margin-bottom: 40px;
-            box-shadow: var(--card-shadow);
-            border: none;
-        }
-
-        .section-title {
-            color: var(--text-main);
             font-size: 2rem;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid var(--primary);
-            font-weight: 700;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--primary);
-        }
-
-        .table-custom {
-            width: 100%;
-            color: var(--text-main);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-        }
-
-        .table-custom thead {
-            background: var(--primary);
-            color: var(--dark);
-        }
-
-        .table-custom th {
-            padding: 20px;
             font-weight: 600;
-            border-bottom: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
         }
 
-        .table-custom td {
-            padding: 20px;
-            border-bottom: 1px solid var(--light);
-            font-weight: 500;
-        }
-
-        .table-custom tbody tr {
-            transition: all .3s ease;
-            background: var(--card-bg);
-        }
-
-        .table-custom tbody tr:hover {
-            background: var(--light);
-            transform: scale(1.01);
-        }
-
-        .table-custom tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .badge-custom {
-            padding: 8px 20px;
-            border-radius: 25px;
+        .stat-change {
             font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
         }
 
-        .badge-success {
-            background: var(--primary);
-            color: var(--dark);
-            box-shadow: 0 4px 15px rgba(255, 193, 7, .3);
+        .stat-change.positive {
+            color: #198754;
         }
 
-        .badge-pending {
-            background: #f39c12;
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(243, 156, 18, .3);
+        .stat-change.negative {
+            color: #dc3545;
         }
 
-        .badge-cancelled {
-            background: #dc3545;
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(220, 53, 69, .3);
+        /* Content Cards */
+        .content-card {
+            background: #111111;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
         }
 
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #2a2c32;
         }
 
-        .action-btn {
-            background: var(--card-bg);
-            border: 2px solid var(--light);
-            background-clip: padding-box;
-            color: var(--text-main);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            transition: all .4s ease;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-            box-shadow: var(--card-shadow);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .action-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--primary);
-            opacity: 0;
-            transition: opacity .3s ease;
-            z-index: 0;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(255, 193, 7, .3);
-            border-color: var(--primary);
-        }
-
-        .action-btn:hover::before {
-            opacity: 0.1;
-        }
-
-        .action-btn i {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            display: block;
-            color: var(--primary);
-            position: relative;
-            z-index: 1;
-            transition: all .3s ease;
-        }
-
-        .action-btn:hover i {
-            transform: scale(1.1);
-        }
-
-        .action-btn span {
+        .card-title {
+            color: #fff;
+            font-size: 1.25rem;
             font-weight: 600;
-            font-size: 1.1rem;
-            position: relative;
-            z-index: 1;
-            color: var(--text-main);
-            transition: color .3s ease;
+            margin: 0;
         }
 
-        .action-btn:hover span {
-            color: var(--primary);
+        .card-action {
+            color: #FFC107;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .card-action:hover {
+            color: #ffcd39;
+        }
+
+        /* Table */
+        .custom-table {
+            width: 100%;
+            color: #BDBDBF;
+        }
+
+        .custom-table thead th {
+            color: #fff;
+            font-weight: 600;
+            padding: 0.75rem;
+            border-bottom: 2px solid #2a2c32;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .custom-table tbody td {
+            padding: 1rem 0.75rem;
+            border-bottom: 1px solid #2a2c32;
+        }
+
+        .custom-table tbody tr:hover {
+            background: #1a1c20;
+        }
+
+        .status-badge {
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-badge.completed {
+            background: rgba(25, 135, 84, 0.2);
+            color: #198754;
+        }
+
+        .status-badge.pending {
+            background: rgba(255, 193, 7, 0.2);
+            color: #FFC107;
+        }
+
+        .status-badge.cancelled {
+            background: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: #FFC107;
+            border: none;
+            border-radius: 50%;
+            color: #111111;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 193, 7, 0.4);
+            z-index: 999;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="dashboard-header">
-        <a href="index.html" class="logo-link">
-            <h1 class="logo-text">CHEFER</h1>
-        </a>
-        <div class="d-flex align-items-center">
-            <button class="btn btn-logout" onclick="handleLogout()">
-                <i class="fas fa-sign-out-alt me-2"></i>Logout
-            </button>
-        </div>
-    </div>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" style="text-decoration: none;">
+                    <h2>Chefer</h2>
+                </a>
+            </div>
 
-    <div class="dashboard-content">
-        <div class="welcome-section wow fadeIn" data-wow-delay="0.2s">
-            <h1>Welcome Back, Chef!</h1>
-            <p>Here's what's happening with your restaurant today</p>
-        </div>
-        <div class="stats-grid">
-            <div class="stat-card wow fadeIn" data-wow-delay="0.3s">
-                <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
-                <div class="stat-value">24</div>
-                <div class="stat-label">Reservations Today</div>
-            </div>
-            <div class="stat-card wow fadeIn" data-wow-delay="0.4s">
-                <div class="stat-icon"><i class="fas fa-utensils"></i></div>
-                <div class="stat-value">156</div>
-                <div class="stat-label">Orders Completed</div>
-            </div>
-            <div class="stat-card wow fadeIn" data-wow-delay="0.5s">
-                <div class="stat-icon"><i class="fas fa-star"></i></div>
-                <div class="stat-value">4.8</div>
-                <div class="stat-label">Average Rating</div>
-            </div>
-            <div class="stat-card wow fadeIn" data-wow-delay="0.6s">
-                <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
-                <div class="stat-value">$8.5K</div>
-                <div class="stat-label">Revenue Today</div>
-            </div>
-        </div>
-        <div class="recent-section wow fadeIn" data-wow-delay="0.7s">
-            <h2 class="section-title">Recent Reservations</h2>
-            <table class="table-custom">
-                <thead>
-                    <tr>
-                        <th>Customer</th>
-                        <th>Date & Time</th>
-                        <th>Guests</th>
-                        <th>Table</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Sarah Johnson</td>
-                        <td>Jan 24, 2026 - 7:00 PM</td>
-                        <td>4</td>
-                        <td>Table 12</td>
-                        <td><span class="badge-custom badge-success">Confirmed</span></td>
-                    </tr>
-                    <tr>
-                        <td>Michael Chen</td>
-                        <td>Jan 24, 2026 - 8:30 PM</td>
-                        <td>2</td>
-                        <td>Table 5</td>
-                        <td><span class="badge-custom badge-pending">Pending</span></td>
-                    </tr>
-                    <tr>
-                        <td>Emma Williams</td>
-                        <td>Jan 25, 2026 - 6:00 PM</td>
-                        <td>6</td>
-                        <td>Table 8</td>
-                        <td><span class="badge-custom badge-success">Confirmed</span></td>
-                    </tr>
-                    <tr>
-                        <td>David Brown</td>
-                        <td>Jan 25, 2026 - 7:30 PM</td>
-                        <td>3</td>
-                        <td>Table 3</td>
-                        <td><span class="badge-custom badge-cancelled">Cancelled</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="recent-section wow fadeIn" data-wow-delay="0.8s">
-            <h2 class="section-title">Quick Actions</h2>
-            <div class="quick-actions">
-                <a href="menu.html" class="action-btn">
-                    <i class="fas fa-book-open"></i>
-                    <span>View Menu</span>
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item active">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Dashboard</span>
                 </a>
-                <a href="#" class="action-btn">
-                    <i class="fas fa-plus-circle"></i>
-                    <span>New Reservation</span>
+                <a href="#" class="menu-item">
+                    <i class="bi bi-receipt"></i>
+                    <span>Orders</span>
                 </a>
-                <a href="team.html" class="action-btn">
-                    <i class="fas fa-users"></i>
-                    <span>Manage Staff</span>
+                <a href="menu.html" class="menu-item">
+                    <i class="bi bi-book"></i>
+                    <span>Menu</span>
                 </a>
-                <a href="#" class="action-btn">
-                    <i class="fas fa-chart-line"></i>
-                    <span>View Reports</span>
+                <a href="#" class="menu-item">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Reservations</span>
                 </a>
-            </div>
-        </div>
-    </div>
-    <!-- Footer Start -->
-    <div class="container-fluid py-4 py-lg-0 px-5 mt-5" style="background: var(--footer-bg);">
-        <div class="row gx-5">
-            <div class="col-lg-12">
-                <div class="py-lg-4 text-center">
-                    <p class="text-secondary mb-0">&copy; Your Site Name. All Rights Reserved. @2026</p>
-                </div>
+                <a href="team.html" class="menu-item">
+                    <i class="bi bi-people"></i>
+                    <span>Staff</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="bi bi-person"></i>
+                    <span>Customers</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="bi bi-bar-chart"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="bi bi-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
 
-        <div class="dashboard-content">
-            <div class="welcome-section wow fadeIn" data-wow-delay="0.2s">
-                <h1>Welcome Back, Chef!</h1>
-                <p>Here's what's happening with your restaurant today</p>
-            </div>
-            <div class="stats-grid">
-                <div class="stat-card wow fadeIn" data-wow-delay="0.3s">
-                    <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
-                    <div class="stat-value">24</div>
-                    <div class="stat-label">Reservations Today</div>
-                </div>
-                <div class="stat-card wow fadeIn" data-wow-delay="0.4s">
-                    <div class="stat-icon"><i class="fas fa-utensils"></i></div>
-                    <div class="stat-value">156</div>
-                    <div class="stat-label">Orders Completed</div>
-                </div>
-                <div class="stat-card wow fadeIn" data-wow-delay="0.5s">
-                    <div class="stat-icon"><i class="fas fa-star"></i></div>
-                    <div class="stat-value">4.8</div>
-                    <div class="stat-label">Average Rating</div>
-                </div>
-                <div class="stat-card wow fadeIn" data-wow-delay="0.6s">
-                    <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
-                    <div class="stat-value">$8.5K</div>
-                    <div class="stat-label">Revenue Today</div>
-                </div>
-            </div>
-            <div class="recent-section wow fadeIn" data-wow-delay="0.7s">
-                <h2 class="section-title">Recent Reservations</h2>
-                <table class="table-custom">
-                    <thead>
-                        <tr>
-                            <th>Customer</th>
-                            <th>Date & Time</th>
-                            <th>Guests</th>
-                            <th>Table</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Sarah Johnson</td>
-                            <td>Jan 24, 2026 - 7:00 PM</td>
-                            <td>4</td>
-                            <td>Table 12</td>
-                            <td><span class="badge-custom badge-success">Confirmed</span></td>
-                        </tr>
-                        <tr>
-                            <td>Michael Chen</td>
-                            <td>Jan 24, 2026 - 8:30 PM</td>
-                            <td>2</td>
-                            <td>Table 5</td>
-                            <td><span class="badge-custom badge-pending">Pending</span></td>
-                        </tr>
-                        <tr>
-                            <td>Emma Williams</td>
-                            <td>Jan 25, 2026 - 6:00 PM</td>
-                            <td>6</td>
-                            <td>Table 8</td>
-                            <td><span class="badge-custom badge-success">Confirmed</span></td>
-                        </tr>
-                        <tr>
-                            <td>David Brown</td>
-                            <td>Jan 25, 2026 - 7:30 PM</td>
-                            <td>3</td>
-                            <td>Table 3</td>
-                            <td><span class="badge-custom badge-cancelled">Cancelled</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="recent-section wow fadeIn" data-wow-delay="0.8s">
-                <h2 class="section-title">Quick Actions</h2>
-                <div class="quick-actions">
-                    <a href="menu.html" class="action-btn">
-                        <i class="fas fa-book-open"></i>
-                        <span>View Menu</span>
-                    </a>
-                    <a href="#" class="action-btn">
-                        <i class="fas fa-plus-circle"></i>
-                        <span>New Reservation</span>
-                    </a>
-                    <a href="team.html" class="action-btn">
-                        <i class="fas fa-users"></i>
-                        <span>Manage Staff</span>
-                    </a>
-                    <a href="#" class="action-btn">
-                        <i class="fas fa-chart-line"></i>
-                        <span>View Reports</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <!-- Footer Start -->
-        <div class="container-fluid py-4 py-lg-0 px-5 mt-5" style="background: var(--footer-bg);">
-            <div class="row gx-5">
-                <div class="col-lg-12">
-                    <div class="py-lg-4 text-center">
-                        <p class="text-secondary mb-0">&copy; Your Site Name. All Rights Reserved. @2026</p>
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">JD</div>
+                    <div>
+                        <div style="color: #fff; font-weight: 600;">John Doe</div>
+                        <div style="font-size: 0.85rem;">Admin</div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Footer End -->
+        </aside>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/wow/wow.min.js"></script>
-        <script src="js/theme.js"></script>
-        <script src="js/main.js"></script>
-        <script>function handleLogout() { if (confirm('Are you sure you want to logout?')) { window.location.href = 'index.html'; } }</script>
-    </body>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <h1>Dashboard Overview</h1>
+                <div class="top-bar-actions">
+                    <button class="notification-btn">
+                        <i class="bi bi-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </button>
+                    <a href="login.html" class="btn btn-outline-secondary btn-sm">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </div>
+            </div>
 
-    </html>
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card warning">
+                    <div class="stat-header">
+                        <span class="stat-title">Total Revenue</span>
+                        <div class="stat-icon warning">
+                            <i class="bi bi-currency-dollar"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">$45,890</div>
+                    <div class="stat-change positive">
+                        <i class="bi bi-arrow-up"></i>
+                        <span>12.5% from last month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card success">
+                    <div class="stat-header">
+                        <span class="stat-title">Total Orders</span>
+                        <div class="stat-icon success">
+                            <i class="bi bi-cart-check"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">1,284</div>
+                    <div class="stat-change positive">
+                        <i class="bi bi-arrow-up"></i>
+                        <span>8.2% from last month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card info">
+                    <div class="stat-header">
+                        <span class="stat-title">Reservations</span>
+                        <div class="stat-icon info">
+                            <i class="bi bi-calendar-event"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">156</div>
+                    <div class="stat-change positive">
+                        <i class="bi bi-arrow-up"></i>
+                        <span>5.7% from last week</span>
+                    </div>
+                </div>
+
+                <div class="stat-card danger">
+                    <div class="stat-header">
+                        <span class="stat-title">Pending Orders</span>
+                        <div class="stat-icon danger">
+                            <i class="bi bi-hourglass-split"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">23</div>
+                    <div class="stat-change negative">
+                        <i class="bi bi-arrow-down"></i>
+                        <span>Needs attention</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Orders -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">Recent Orders</h3>
+                    <a href="#" class="card-action">View All <i class="bi bi-arrow-right"></i></a>
+                </div>
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Items</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#ORD-1245</td>
+                                <td>Sarah Johnson</td>
+                                <td>Grilled Salmon, Caesar Salad</td>
+                                <td>$45.99</td>
+                                <td><span class="status-badge completed">Completed</span></td>
+                                <td>10 mins ago</td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-1244</td>
+                                <td>Michael Chen</td>
+                                <td>Ribeye Steak, Red Wine</td>
+                                <td>$89.50</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td>25 mins ago</td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-1243</td>
+                                <td>Emma Wilson</td>
+                                <td>Pasta Carbonara, Tiramisu</td>
+                                <td>$32.75</td>
+                                <td><span class="status-badge completed">Completed</span></td>
+                                <td>1 hour ago</td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-1242</td>
+                                <td>David Brown</td>
+                                <td>Margherita Pizza, Coke</td>
+                                <td>$18.99</td>
+                                <td><span class="status-badge cancelled">Cancelled</span></td>
+                                <td>2 hours ago</td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-1241</td>
+                                <td>Lisa Anderson</td>
+                                <td>Seafood Platter, White Wine</td>
+                                <td>$125.00</td>
+                                <td><span class="status-badge completed">Completed</span></td>
+                                <td>3 hours ago</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">Quick Actions</h3>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-3 col-sm-6">
+                        <a href="#" class="btn btn-primary w-100">
+                            <i class="bi bi-plus-circle me-2"></i>New Order
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <a href="#" class="btn btn-outline-secondary w-100">
+                            <i class="bi bi-calendar-plus me-2"></i>Add Reservation
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <a href="menu.html" class="btn btn-outline-secondary w-100">
+                            <i class="bi bi-pencil-square me-2"></i>Edit Menu
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <a href="#" class="btn btn-outline-secondary w-100">
+                            <i class="bi bi-file-earmark-text me-2"></i>View Reports
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border-top border-secondary pt-4 mt-4">
+                <div class="col-12 text-center text-secondary">
+                    &copy; 2026 Chefer. All rights reserved.
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const sidebar = document.getElementById('sidebar');
+
+        mobileMenuToggle.addEventListener('click', function () {
+            sidebar.classList.toggle('active');
+        });
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function (event) {
+            if (window.innerWidth <= 1024) {
+                if (!sidebar.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                    sidebar.classList.remove('active');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
