@@ -96,6 +96,15 @@ h6,
         margin-right: 0;
         padding: 10px 0;
     }
+
+    .container-fluid.p-5>.row.gx-5>[style*="min-height: 500px"] {
+        min-height: 350px !important;
+        margin-bottom: 2rem;
+    }
+
+    .container-fluid.p-5>.row.gx-5>.col-lg-7 .row>.col-sm-6 {
+        margin-bottom: 1rem;
+    }
 }
 
 @media (min-width: 992px) {
@@ -129,16 +138,18 @@ h6,
     animation: animateUpDown 1s ease infinite;
 }
 
-@keyframes animateUpDown { 
-    0% { 
+@keyframes animateUpDown {
+    0% {
         top: 0px;
     }
-    50% { 
+
+    50% {
         top: 10px;
     }
-    100% { 
+
+    100% {
         top: 0px;
-    } 
+    }
 }
 
 .animate-rotate {
@@ -146,10 +157,10 @@ h6,
     animation: animateRotate 8s linear infinite;
 }
 
-@keyframes animateRotate { 
-    100% { 
-        transform: rotate(360deg); 
-    } 
+@keyframes animateRotate {
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .bg-hero {
@@ -268,6 +279,17 @@ h6,
 }
 
 
+/********** Footer Link Styles **********/
+
+.bg-dark a.text-secondary {
+    transition: color 0.3s ease;
+}
+
+.bg-dark a.text-secondary:hover {
+    color: var(--bs-primary) !important;
+}
+
+
 /********** Theme Toggle Button **********/
 
 .theme-toggle-btn {
@@ -326,7 +348,12 @@ body .bg-light,
 body .bg-white,
 body .dropdown-menu,
 body .form-control,
-body h1, body h2, body h3, body h4, body h5, body h6,
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6,
 body p {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
@@ -437,6 +464,18 @@ body.dark-mode .section-title {
 /* Feature section gradient */
 body.dark-mode .feature .feature-item {
     background: linear-gradient(#1e293b 50%, var(--bs-dark));
+}
+
+body.dark-mode .feature .feature-item h3 {
+    color: #f1f5f9 !important;
+}
+
+body.dark-mode .feature .feature-item p {
+    color: #cbd5e1 !important;
+}
+
+body.dark-mode .feature .feature-item a {
+    color: var(--bs-primary) !important;
 }
 
 body.dark-mode .feature .feature-item .img-fluid.bg-white {
