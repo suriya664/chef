@@ -28,9 +28,14 @@
 
     <style>
         /* Base / Light Mode */
+        html,
+        body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
         body {
             background: #F3F6F9;
-            overflow-x: hidden;
             color: #6c757d;
             transition: background 0.3s, color 0.3s;
         }
@@ -122,6 +127,8 @@
             margin-left: 260px;
             padding: 2rem;
             transition: all 0.3s;
+            min-width: 0;
+            /* Prevents flex item from overflowing */
         }
 
         .top-bar {
@@ -377,9 +384,7 @@
         /* Mobile Menu Toggle */
         .mobile-menu-toggle {
             display: none;
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            position: static;
             width: 60px;
             height: 60px;
             background: var(--bs-primary);
@@ -389,7 +394,24 @@
             font-size: 1.5rem;
             cursor: pointer;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            z-index: 999;
+            padding: 0;
+        }
+
+        .dashboard-mobile-nav {
+            display: none;
+        }
+
+        .dashboard-mobile-brand {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .dashboard-mobile-brand h2 {
+            font-family: 'Emblema One', system-ui;
+            color: var(--bs-primary);
+            margin: 0;
+            font-size: 1.75rem;
         }
 
         /* Dark Mode Overrides */
@@ -471,6 +493,56 @@
             box-shadow: 0 5px 20px rgba(255, 193, 7, 0.4);
         }
 
+        body.dark-mode .dashboard-mobile-brand h2 {
+            color: var(--bs-primary);
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 280px;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .sidebar .sidebar-menu {
+                display: none;
+            }
+
+            .sidebar.active .sidebar-menu {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .dashboard-mobile-nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: #FFFFFF;
+                padding: 1rem;
+                border-radius: 12px;
+                margin-bottom: 1rem;
+                border: 1px solid #e9ecef;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.02);
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: auto;
+            }
+
+            .top-bar .d-lg-none {
+                display: none !important;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .sidebar {
@@ -485,12 +557,6 @@
             .main-content {
                 margin-left: 0;
                 padding: 1rem;
-            }
-
-            .mobile-menu-toggle {
-                display: flex;
-                align-items: center;
-                justify-content: center;
             }
 
             .stats-grid {
@@ -536,6 +602,16 @@
 
             .quick-actions .col-md-3 {
                 margin-bottom: 0.5rem;
+            }
+        }
+
+        @media (min-width: 993px) {
+            .dashboard-mobile-nav {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: none;
             }
         }
 
@@ -619,6 +695,23 @@
                 padding: 0.4rem 0.6rem;
             }
         }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                max-width: 100vw;
+                box-sizing: border-box;
+            }
+
+            .table-responsive {
+                max-width: 100%;
+                overflow-x: auto;
+            }
+
+            .content-card {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+        }
     </style>
 </head>
 
@@ -680,18 +773,27 @@
 
         <!-- Main Content -->
         <main class="main-content">
+            <nav class="dashboard-mobile-nav">
+                <a href="index.html" class="dashboard-mobile-brand">
+                    <h2>Chefer</h2>
+                </a>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Toggle menu">
+                    <i class="bi bi-list"></i>
+                </button>
+            </nav>
+
             <!-- Top Bar -->
             <div class="top-bar">
-                <div class="d-flex align-items-center gap-3">
+                <div class="d-flex align-items-center gap-3 flex-wrap">
                     <a href="index.html" class="d-lg-none" style="text-decoration: none;">
                         <h2
                             style="font-family: 'Emblema One', system-ui; color: var(--bs-primary); margin: 0; font-size: 1.75rem;">
                             Chefer</h2>
                     </a>
-                    <h1>Dashboard Overview</h1>
+                    <h1 class="text-truncate" style="max-width: 100%;">Dashboard Overview</h1>
                 </div>
                 <div class="top-bar-actions">
-                    <button class="btn theme-toggle-btn" aria-label="Toggle dark mode">
+                    <button class="btn theme-toggle-trigger theme-toggle-btn" aria-label="Toggle dark mode">
                         <i class="bi bi-moon-fill"></i>
                     </button>
                     <button class="notification-btn">
@@ -833,22 +935,22 @@
                     <h3 class="card-title">Quick Actions</h3>
                 </div>
                 <div class="row g-3">
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-6">
                         <a href="#" class="btn btn-primary w-100">
                             <i class="bi bi-plus-circle me-2"></i>New Order
                         </a>
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-6">
                         <a href="#" class="btn btn-outline-secondary w-100">
                             <i class="bi bi-calendar-plus me-2"></i>Booking
                         </a>
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-6">
                         <a href="menu.html" class="btn btn-outline-secondary w-100">
                             <i class="bi bi-pencil-square me-2"></i>Menu
                         </a>
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-6">
                         <a href="#" class="btn btn-outline-secondary w-100">
                             <i class="bi bi-file-earmark-text me-2"></i>View
                         </a>
@@ -863,11 +965,6 @@
             </div>
         </main>
     </div>
-
-    <!-- Mobile Menu Toggle -->
-    <button class="mobile-menu-toggle" id="mobileMenuToggle">
-        <i class="bi bi-list"></i>
-    </button>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -885,7 +982,7 @@
 
         // Close sidebar when clicking outside on mobile
         document.addEventListener('click', function (event) {
-            if (window.innerWidth <= 1024) {
+            if (window.innerWidth <= 992) {
                 if (!sidebar.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
                     sidebar.classList.remove('active');
                 }
@@ -895,3 +992,4 @@
 </body>
 
 </html>
+

@@ -30,6 +30,12 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+        .home2-hero {
+            background: linear-gradient(rgba(17, 17, 17, 0.72), rgba(17, 17, 17, 0.72)), url('img/hero-2.jpg') center center no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 
 <body>
@@ -54,7 +60,7 @@
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
                     <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="team.html" class="nav-item nav-link active">Chefs</a>
+                    <a href="team.html" class="nav-item nav-link active">Home 2</a>
                     <a href="about.html" class="nav-item nav-link">About</a>
                     <a href="menu.html" class="nav-item nav-link">Menu</a>
                     <div class="nav-item dropdown">
@@ -69,7 +75,7 @@
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
                 <div class="d-none d-lg-flex align-items-center">
-                    <div id="theme-toggle" class="nav-item nav-link me-2"><i class="bi bi-moon"></i></div>
+                    <div id="theme-toggle" class="theme-toggle-trigger nav-item nav-link me-2"><i class="bi bi-moon"></i></div>
                     <a href="login.html" class="btn btn-primary header-btn">Login</a>
                 </div>
                 <div class="d-flex d-lg-none align-items-center gap-2 py-2">
@@ -87,12 +93,102 @@
 
 
     <!-- Hero Start -->
-    <div class="container-fluid p-5 mb-5 bg-dark text-secondary">
-        <div class="container wow fadeIn" data-wow-delay="0.1s">
-            <h1 class="display-1 text-secondary text-center mb-0">Chefs</h1>
+    <div class="container-fluid home2-hero py-5 mb-5">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center wow fadeIn" data-wow-delay="0.1s">
+                    <p class="text-primary text-uppercase mb-3" style="letter-spacing: .35rem;">Home 2 Experience</p>
+                    <h1 class="display-1 text-secondary mb-3">Chefs</h1>
+                    <p class="fs-5 text-light mb-4">Discover our culinary team, signature style, and refined service
+                        crafted to create memorable dining moments.</p>
+                    <a href="contact.html" class="btn btn-primary py-3 px-5">Book a Table</a>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Hero End -->
+
+
+    <!-- Premium Food Highlights Start -->
+    <div class="container-fluid p-5">
+        <div class="mb-5 text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 760px; margin: auto;">
+            <h5 class="section-title">Chef Curations</h5>
+            <h1 class="display-4 mb-0">Premium Food Highlights</h1>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.2s">
+                <div class="bg-dark rounded overflow-hidden h-100" style="border: 1px solid rgba(255, 193, 7, .2);">
+                    <div class="position-relative">
+                        <img class="img-fluid w-100" src="img/menu-2.jpg" alt="">
+                        <span class="position-absolute top-0 end-0 bg-primary text-dark px-3 py-1 small"
+                            style="font-weight: 600;">Chef Pick</span>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="text-secondary mb-3">Truffle Herb Pasta</h4>
+                        <p class="mb-0 text-light" style="opacity: .82;">Handmade pasta finished with black truffle,
+                            garden herbs, and slow-roasted garlic cream.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.3s">
+                <div class="bg-dark rounded overflow-hidden h-100" style="border: 1px solid rgba(255, 193, 7, .2);">
+                    <div class="position-relative">
+                        <img class="img-fluid w-100" src="img/menu-4.jpg" alt="">
+                        <span class="position-absolute top-0 end-0 bg-primary text-dark px-3 py-1 small"
+                            style="font-weight: 600;">Guest Favorite</span>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="text-secondary mb-3">Smoked Grilled Salmon</h4>
+                        <p class="mb-0 text-light" style="opacity: .82;">Atlantic salmon grilled over oak wood, paired
+                            with citrus glaze and seasonal greens.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.4s">
+                <div class="bg-dark rounded overflow-hidden h-100" style="border: 1px solid rgba(255, 193, 7, .2);">
+                    <div class="position-relative">
+                        <img class="img-fluid w-100" src="img/menu-6.jpg" alt="">
+                        <span class="position-absolute top-0 end-0 bg-primary text-dark px-3 py-1 small"
+                            style="font-weight: 600;">Premium</span>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="text-secondary mb-3">Signature Steak Board</h4>
+                        <p class="mb-0 text-light" style="opacity: .82;">Aged cut steak with buttered vegetables and
+                            house pepper jus for a bold, balanced finish.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Premium Food Highlights End -->
+
+
+    <!-- Why Choose CHEFER Start -->
+    <div class="container-fluid p-5 pt-0">
+        <div class="row g-0 bg-dark rounded overflow-hidden align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <img class="img-fluid w-100 h-100" src="img/menu-7.jpg" alt=""
+                    style="min-height: 420px; object-fit: cover;">
+            </div>
+            <div class="col-lg-6 wow fadeIn p-4 p-lg-5" data-wow-delay="0.3s">
+                <h5 class="section-title">Why Choose CHEFER</h5>
+                <h1 class="display-5 text-secondary mb-4">Fine Dining Crafted With Precision</h1>
+                <p class="text-light mb-4" style="opacity: .85;">CHEFER combines culinary artistry, disciplined kitchen
+                    standards, and premium ingredients to deliver consistent, restaurant-quality experiences every day.
+                </p>
+                <div class="mb-4">
+                    <p class="text-secondary mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Fresh,
+                        seasonal ingredients sourced daily</p>
+                    <p class="text-secondary mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Skilled
+                        chefs with global culinary expertise</p>
+                    <p class="text-secondary mb-0"><i class="bi bi-check-circle-fill text-primary me-2"></i>Elegant
+                        presentation and dependable service</p>
+                </div>
+                <a href="menu.html" class="btn btn-primary py-3 px-5">Explore Menu</a>
+            </div>
+        </div>
+    </div>
+    <!-- Why Choose CHEFER End -->
 
 
     <!-- Team Start -->
@@ -301,3 +397,4 @@
 </body>
 
 </html>
+
