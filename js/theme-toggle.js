@@ -1,72 +1,45 @@
 /**
- * Theme toggle (dark/light) with persistent localStorage state.
- * Works with all header toggle variants across pages.
+ * Theme Toggle — Dark Mode / Light Mode
+ * Persists user preference via localStorage.
+ * Default: light (white) mode.
  */
 (function () {
     'use strict';
 
-    var STORAGE_KEY = 'chefer-theme';
-    var DARK_CLASS = 'dark-mode';
-    var TOGGLE_SELECTOR = '.theme-toggle-trigger, .theme-toggle-btn, #theme-toggle';
-
-    function readSavedTheme() {
-        try {
-            return localStorage.getItem(STORAGE_KEY);
-        } catch (err) {
-            return null;
-        }
+    // Apply saved theme immediately to avoid FOUC
+    var savedTheme = localStorage.getItem('chefer-theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
     }
 
-    function saveTheme(theme) {
-        try {
-            localStorage.setItem(STORAGE_KEY, theme);
-        } catch (err) {
-            // Ignore storage errors (private mode / blocked storage)
-        }
-    }
+    document.addEventListener('DOMContentLoaded', function () {
+        var toggleButtons = document.querySelectorAll('.theme-toggle-btn');
+        var isDark = document.body.classList.contains('dark-mode');
 
-    function applyTheme(isDark) {
-        if (!document.body) {
-            return;
-        }
-        document.body.classList.toggle(DARK_CLASS, isDark);
-    }
+        // Set initial icon state
+        updateIcons(isDark);
 
-    function getToggleButtons() {
-        return document.querySelectorAll(TOGGLE_SELECTOR);
-    }
-
-    function updateIcons(isDark, toggleButtons) {
+        // Attach click handler to all toggle buttons (desktop + mobile)
         toggleButtons.forEach(function (btn) {
-            var icon = btn.querySelector('i');
-            if (icon) {
-                icon.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
-            }
-        });
-    }
-
-    function initThemeToggle() {
-        var isDark = readSavedTheme() === 'dark';
-        var toggleButtons = getToggleButtons();
-
-        applyTheme(isDark);
-        updateIcons(isDark, toggleButtons);
-
-        toggleButtons.forEach(function (btn) {
-            btn.setAttribute('aria-label', 'Toggle dark mode');
-
             btn.addEventListener('click', function () {
-                var nextIsDark = !document.body.classList.contains(DARK_CLASS);
-                applyTheme(nextIsDark);
-                saveTheme(nextIsDark ? 'dark' : 'light');
-                updateIcons(nextIsDark, toggleButtons);
+                isDark = !isDark;
+                document.body.classList.toggle('dark-mode', isDark);
+                localStorage.setItem('chefer-theme', isDark ? 'dark' : 'light');
+                updateIcons(isDark);
             });
         });
-    }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initThemeToggle);
-    } else {
-        initThemeToggle();
-    }
+        function updateIcons(dark) {
+            toggleButtons.forEach(function (btn) {
+                var icon = btn.querySelector('i');
+                if (icon) {
+                    if (dark) {
+                        icon.className = 'bi bi-sun-fill';
+                    } else {
+                        icon.className = 'bi bi-moon-fill';
+                    }
+                }
+            });
+        }
+    });
 })();
